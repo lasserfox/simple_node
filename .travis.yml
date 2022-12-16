@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 13
+services:
+  -docker
+install:
+  - echo "no pre req to install"
+before_script:
+  - echo "no test"
+script:
+  - docker --version
+  - docker build -t simple-node .
+  - docker tag simple-node lasserfox/udatest:latest
+after_success:
+  - echo "$DOCKER_PASSWORD" | dockerlogin -u "$DOCKER_USERNAME· --password-stdin
+  - echo docker push lasserfox/udatest
+
